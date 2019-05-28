@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap  PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="SRC0001">
+
+	<select id="getAllProduct"
+		resultClass="com.app.scr0001.bean.SRC0001Bean">
+		SELECT
+		ID As id, PRODUCTNAME As productName, DESCRIPTION As
+		description, PRICE
+		As price
+		FROM PRODUCT
+		ORDER BY id
+	</select>
+
+	<delete id="deleteProduct" parameterClass="String"> DELETE FROM PRODUCT
+		WHERE ID = #id#
+	</delete>
+	<insert id="insertProduct"
+		parameterClass="com.app.scr0001.bean.SRC0001Bean">
+		INSERT INTO PRODUCT(id, productName, description, price) VALUES
+		(#id#,#productName#,#description#,#price#)
+	</insert>
+	<select id="searchProduct"
+		resultClass="com.app.scr0001.bean.SRC0001Bean">
+		SELECT ID As id, PRODUCTNAME As productName, DESCRIPTION As description,
+		PRICE As price FROM PRODUCT WHERE PRODUCTNAME LIKE '%'
+		||#productName#||
+		'%' ORDER BY id
+	 </select>
+
+	<select id="getProductById"
+		resultClass="com.app.scr0001.bean.SRC0001Bean" parameterClass="String">
+		Select
+		ID As id,PRODUCTNAME As productName, DESCRIPTION As description,
+		PRICE
+		As price FROM PRODUCT WHERE ID=#id#
+	</select>
+	<update id="updateProduct"
+		parameterClass="com.app.scr0001.bean.SRC0001Bean">
+		UPDATE PRODUCT
+		SET PRODUCTNAME =
+		#productName#,DESCRIPTION=#description#,PRICE=#price#
+		WHERE ID = #id#
+	</update>
+</sqlMap>
